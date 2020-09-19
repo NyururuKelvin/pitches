@@ -7,6 +7,9 @@ from flask_mail import Mail
 
 bootstrap=Bootstrap()
 db=SQLAlchemy()
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.login_view = 'auth.login'
 
 def create_app(config_name):
 
@@ -14,6 +17,7 @@ def create_app(config_name):
     #initialize app extentions
     db.init_app(app)
     bootstrap.init_app(app)
+    login_manager.init_app(app)
 
     #regster your blueprint
     from .main import main as main_blueprint
