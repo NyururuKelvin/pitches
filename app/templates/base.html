@@ -1,4 +1,9 @@
 {% extends 'bootstrap/base.html' %}
+{% if title %}
+<title> {{ title }}</title>
+{% else %}
+<title> Welcome to Pitches website </title>
+{% endif %}
 
 {% block content %}
     {% include 'navbar.html' %}
