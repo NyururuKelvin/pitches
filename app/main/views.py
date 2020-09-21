@@ -6,7 +6,7 @@ from . import main
 from flask_login import login_required,current_user
 from ..models import User,Role,Comment,Pitch
 from .. import db,photos
-from manage import app
+# from manage import app
 from .forms import UpdateProfile,UploadPitch,CommentsForm
 from flask import current_app
 
@@ -14,12 +14,14 @@ from flask import current_app
 def index():
 
     title = 'Pitches Hub'
+    all_pitch=Pitch
   
-    return render_template('index.html', title = title)
+    return render_template('index.html',pitches=all_pitch, title = title)
 
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
+    pitch=Pitch.query.filter_by(user_id=current_user.id).all()
 
     if user is None:
         abort(404)
@@ -135,9 +137,6 @@ def delete_pitch(pitch_id):
 def posted(username):
     user=User.query.filter_by(username=username).first_or_404()
     image=url_for('static',filename='profile/'+ user.profile_pic_path)
-    page=request.args.get('page',1,type=int)
-    all_pitch=Pitch.query.filter_by(user=user)\
-            .order_by(Pitch.posted.desc())\
-            .paginate(page=page,per_page=10)
+    all_pitch=Pitch.query.filter_by(user=user)
 
     return render_template('posted_by.html',pitches=all_pitch,title=user.username,user=user,image=image)
