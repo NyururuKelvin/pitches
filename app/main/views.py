@@ -1,4 +1,6 @@
 import os
+import functools
+import secrets
 from flask import render_template,redirect,url_for,abort,flash,request
 from . import main
 from flask_login import login_required,current_user
@@ -6,23 +8,7 @@ from ..models import User,Role,Comment,Pitch
 from .. import db,photos
 from manage import app
 from .forms import UpdateProfile
-
-vote=0
-def Upvote(pitch):
-    if pitch:
-        vote=0
-        vote=pitch+1
-
-    return vote
-
-
-
-def Downvote(pitch):
-    if pitch:
-        vote=0
-        vote=pitch+1
-
-    return vote
+from flask import current_app
 
 @main.route('/')
 def index():
@@ -91,8 +77,20 @@ def comment(pname):
     image=url_for('static',filename='profile/'+ current_user.profile_pic_path)
     pitch=Pitch.query.filter_by(id=pname).first()
     comment_query=Comment.query.filter_by(pitch_id=pitch.id).all()
-    # upvote=Upvote(pitch.upvotes)
-    # downvote=Downvote(pitch.downvotes)
+    
+    if request.args.get('likes'):
+        pitch.upvotes=pitch.upvotes+int(1)
+        db.session.add(pitch)
+        db.session.commit()
+        return redirect(url_for('main.comment',pname=pname))
+
+    
+    elif    request.args.get('dislike'):
+        pitch.downvotes=pitch.downvotes+int(1)
+        db.session.add(pitch)
+        db.session.commit()
+        return redirect(url_for('main.comment',pname=pname))
+
     if comments.validate_on_submit():
         comment=Comment(comment=comments.comment.data,pitch_id=pitch.id,user_id=current_user.id)
         db.session.add(comment)
