@@ -1,4 +1,5 @@
 import os
+from flask_mail import Mail
 
 class Config:
     UPLOADED_PHOTOS_DEST ='app/static/photos'
