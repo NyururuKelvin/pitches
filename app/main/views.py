@@ -7,6 +7,23 @@ from .. import db,photos
 from manage import app
 from .forms import UpdateProfile
 
+vote=0
+def Upvote(pitch):
+    if pitch:
+        vote=0
+        vote=pitch+1
+
+    return vote
+
+
+
+def Downvote(pitch):
+    if pitch:
+        vote=0
+        vote=pitch+1
+
+    return vote
+
 @main.route('/')
 def index():
 
