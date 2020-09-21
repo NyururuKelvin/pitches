@@ -7,15 +7,15 @@ from flask_login import login_required,current_user
 from ..models import User,Role,Comment,Pitch
 from .. import db,photos
 from manage import app
-from .forms import UpdateProfile
+from .forms import UpdateProfile,UploadPitch,CommentsForm
 from flask import current_app
 
 @main.route('/')
 def index():
 
-    title = 'Pitches | Hub'
+    title = 'Pitches Hub'
   
-    return render_template('index.html',title=title)
+    return render_template('index.html', title = title)
 
 @main.route('/user/<uname>')
 def profile(uname):
