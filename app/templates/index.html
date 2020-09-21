@@ -1,8 +1,47 @@
+
 {% extends 'base.html'%}
 {% block styles%}
     {{super()}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
-{% endblock%}
+    {% endblock%}
+{% block content%}
+    <div class="row">
+        <div class="col-md-2 col-lg-2 col-xs-1"></div>
+        <div class="col-md-8 col-lg-8 col-xs-10 ">
+            <ul class="list-index ">
+                {% for pitch in pitches.items%}
+                <li class="jumbotron " style="padding-left:40px ; list-style-type: none;">                 
+                    <div class="card mb-6 bg-dark text-white">
+                        <div class="card-body">
+                            <h4 class="card-title"> Pitch Category: {{pitch.pitch_category}} <span></span><a href="{{url_for('main.posted',username=pitch.user.username)}}">Posted By: {{pitch.user.username}}</a></h4>
+                            <p class="card-text">{{pitch.pitch}}</p>
+                            <p class="card-text">Posted On: {{pitch.posted.strftime('%Y-%m-%d')}}<span></span><span></span>Likes: {{pitch.upvotes}}<span></span>Dislikes: {{pitch.downvotes}}</p>
+                        </div>
+                        <a href="{{url_for('main.comment',pname=pitch.id)}}"><i class="fa fa-comment" aria-hidden="true"></i></a> <span><span><a href="{{url_for('main.comment',pname=pitch.id)}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                        </a></span> <span><a href="{{url_for('main.comment',pname=pitch.id)}}"><i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                        </a></span></span>
+                    </div>              
+                </li>
+                <br>
+                {%endfor%}
+            </ul>
+            <div class="text-center">
+                {% for page in pitches.iter_pages(left_edge=2,right_edge=2,left_current=2,right_current=2)%}
+                    {% if page %}
+                        {% if pitches.page==page%}
+                        <a class="btn btn-primary " href="{{url_for('main.index',page=page)}}">{{ page }}</a>
+                        {% else %}
+                        <a class="btn btn-outline-secondary" href="{{url_for('main.index',page=page)}}">{{ page }}</a>
+                        {% endif%}
+                    {% else %}
+                        ...
+                    {% endif %}
+                {% endfor%}
+            </div>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xs-1"></div>
+    </div>
 
-    <h2>{{message}}</h2>
+
+{% endblock %}
