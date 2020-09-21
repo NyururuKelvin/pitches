@@ -33,19 +33,6 @@
                 <br>
                 {%endfor%}
             </ul>
-            <div class="text-center">
-                {% for page in pitches.iter_pages(left_edge=2,right_edge=2,left_current=2,right_current=2)%}
-                    {% if page %}
-                        {% if pitches.page==page%}
-                        <a class="btn btn-primary " href="{{url_for('main.index',page=page)}}">{{ page }}</a>
-                        {% else %}
-                        <a class="btn btn-outline-secondary" href="{{url_for('main.index',page=page)}}">{{ page }}</a>
-                        {% endif%}
-                    {% else %}
-                        ...
-                    {% endif %}
-                {% endfor%}
-            </div>
         </div>
         <div class="col-md-2 col-lg-2 col-xs-1"></div>
     </div>
