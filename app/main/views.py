@@ -4,7 +4,7 @@ import secrets
 from flask import render_template,redirect,url_for,abort,flash,request
 from . import main
 from flask_login import login_required,current_user
-from ..models import User,Role,Comment,Pitch
+from ..models import User,Comment,Pitch
 from .. import db,photos
 # from manage import app
 from .forms import UpdateProfile,UploadPitch,CommentsForm
