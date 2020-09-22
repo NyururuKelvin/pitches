@@ -58,6 +58,7 @@ class Comment(db.Model):
 
     def __repr__(self):
         return f"Comment ('{self.comment}','{self.user}')"
+        
     def save_comment(self):
         db.session.add(self)
         db.session.commit()
