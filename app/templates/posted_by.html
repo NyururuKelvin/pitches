@@ -15,7 +15,7 @@
                 <h1>Pitch By: {{user.username}}. Total ({{pitches.total}})</h1>
                 <div class="col-md-6 col-lg-6 col-sm-4  col-xs-4" >
                     {% if user.profile_pic_path %}
-                    <img src="{{image}}" class="img-circle img-responsive" alt="..." style="width: 250px; height: 250px;">
+                    <img src="{{url_for('static',filename=user.profile_pic_path)}}" class="img-circle img-responsive" alt="" class="img-thumbnail" style="width: 250px; height: 250px;">
                     {%else%}
                     <img src="{{url_for('static', filename='profile/profile.png')}}" class="card-img rounded-circle" alt="" style="width: auto; height: auto;" class="img-responsive">
                     {% endif %}
@@ -42,13 +42,13 @@
             <li class="jumbotron " style="padding-left:40px ; list-style-type: none;">                 
                 <div class="card mb-6 bg-dark text-white">
                     <div class="card-body">
-                        <h4 class="card-title"> Pitch Category: {{pitch.pitch_category}} <span></span> Posted By: {{pitch.user.username}}</h4>
+                        <h4 class="card-title" style="color:crimson"> Pitch Category: {{pitch.pitch_category}} <span></span> Posted By: {{pitch.user.username}}</h4>
                         <p class="card-text">{{pitch.pitch}}</p>
-                        <p class="card-text"> Posted On: {{pitch.posted.strftime('%Y-%m-%d')}}<span></span>Likes: {{pitch.upvotes}} <span></span>Dislikes: {{pitch.downvotes}}</p>
+                        <p class="card-text" style="color:crimson"> Posted On: {{pitch.posted.strftime('%Y-%m-%d')}}<span></span>Likes: {{pitch.upvotes}} <span></span>Dislikes: {{pitch.downvotes}}</p>
                     </div>
-                    <a href="{{url_for('main.comment',pname=pitch.id)}}"><i class="fa fa-comment" aria-hidden="true"></i>
-                    </a> <span><span><a href=""><i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                    </a></span> <span><a href="{{downvote}}"><i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                    <a href="{{url_for('main.comment',pname=pitch.id)}}"><i class="fa fa-comment" style="font-size:36px;color:blue" aria-hidden="true"></i>
+                    </a> <span><span><a href=""><i class="fa fa-thumbs-up" style="font-size:36px;color:green" aria-hidden="true"></i>
+                    </a></span> <span><a href="{{downvote}}"><i class="fa fa-thumbs-down" style="font-size:36px;color:red" aria-hidden="true"></i>
                     </a></span></span>
                 </div>              
             </li>

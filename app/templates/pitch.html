@@ -13,15 +13,15 @@
         <div class="col-md-8 col-lg-6 col-xs-10 jumbotron">
             <div class="card mb-6 bg-dark text-white">
                 <div class="card-body">
-                <h4 class="card-title">Pitch Category: {{pitch.pitch_category}} <span></span>Posted By: {{pitch.user.username}}</h4>
+                <h4 class="card-title" style="color:crimson">Pitch Category: {{pitch.pitch_category}} <span></span>Posted By: {{pitch.user.username}}</h4>
                 <p class="card-text">{{pitch.pitch}}</p>
-                <p class="card-text">Posted On: {{pitch.posted.strftime('%Y-%m-%d')}}~<span></span>Likes: {{pitch.upvotes}}~<span></span>Dislikes: {{pitch.downvotes}}</p>
+                <p class="card-text" style="color:crimson">Posted On: {{pitch.posted.strftime('%Y-%m-%d')}}~<span></span>Likes: {{pitch.upvotes}}~<span></span>Dislikes: {{pitch.downvotes}}</p>
                 </div>
             </div>
             <p>
                 <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="link" aria-expanded="false" aria-controls="collapseExample">
-                    <i class="fa fa-comment" style="font-size:48px;color:blue" aria-hidden="true"></i> 
-                </a> <span><span><a href=""><i class="fa fa-thumbs-up" style="font-size:48px;color:green" aria-hidden="true"></i></a></span> <span><a href=""><i class="fa fa-thumbs-down" style="font-size:48px;color:red" aria-hidden="true"></i>
+                    <i class="fa fa-comment" style="font-size:36px;color:blue" aria-hidden="true"></i> 
+                </a> <span><span><a href=""><i class="fa fa-thumbs-up" style="font-size:36px;color:green" aria-hidden="true"></i></a></span> <span><a href=""><i class="fa fa-thumbs-down" style="font-size:36px;color:red" aria-hidden="true"></i>
                 </a></span></span>
             </p>
             <div class="collapse" id="collapseExample">
@@ -37,7 +37,7 @@
                     <li style="list-style-type: none;">
                         <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2">
                             {% if comment.user.profile_pic_path %}
-                            <img src="{{image}}" class="img-circle img-responsive" style="width: 30px; height: 30px;">
+                            <img src="{{url_for('static',filename=comment.user.profile_pic_path)}}" class="img-circle img-responsive" style="width: 50px; height: 50px;">
                             {%else%}
                             <img src="{{url_for('static', filename='profile/profile.png')}}" class="card-img rounded-circle" alt="" style="width: 25px; height: 25px;">
                             {% endif %}
