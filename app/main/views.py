@@ -13,7 +13,7 @@ from flask import current_app
 @main.route('/')
 def index():
 
-    title = 'Pitches Hub'
+    title = 'Pitches | Hub'
     all_pitch=Pitch
   
     return render_template('index.html',pitches=all_pitch, title = title)
@@ -21,8 +21,7 @@ def index():
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
-    pitch=Pitch.query.filter_by(user_id=current_user.id).all()
-
+   
     if user is None:
         abort(404)
 
@@ -32,6 +31,8 @@ def profile(uname):
 @login_required
 def update_profile(uname):
     user = User.query.filter_by(username = uname).first()
+    pitch=Pitch.query.filter_by(user_id=current_user.id).all()
+    
     if user is None:
         abort(404)
 
