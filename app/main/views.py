@@ -10,11 +10,30 @@ from .. import db,photos
 from .forms import UpdateProfile,UploadPitch,CommentsForm
 from flask import current_app
 
+
+vote=0
+def Upvote(pitch):
+    if pitch:
+        vote=0
+        vote=pitch+1
+
+    return vote
+
+
+
+def Downvote(pitch):
+    if pitch:
+        vote=0
+        vote=pitch+1
+
+    return vote
+
 @main.route('/')
 def index():
 
     title = 'Pitches | Hub'
-    all_pitch=Pitch
+    page=request.args.get('page',1,type=int)
+    all_pitch=Pitch.query.order_by(Pitch.posted.desc()).paginate(page=page,per_page=10)
   
     return render_template('index.html',pitches=all_pitch, title = title)
 
@@ -138,6 +157,9 @@ def delete_pitch(pitch_id):
 def posted(username):
     user=User.query.filter_by(username=username).first_or_404()
     image=url_for('static',filename='profile/'+ user.profile_pic_path)
-    all_pitch=Pitch.query.filter_by(user=user)
+    page=request.args.get('page',1,type=int)
+    all_pitch=Pitch.query.filter_by(user=user)\
+            .order_by(Pitch.posted.desc())\
+            .paginate(page=page,per_page=10)
 
     return render_template('posted_by.html',pitches=all_pitch,title=user.username,user=user,image=image)
