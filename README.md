@@ -40,10 +40,10 @@ Open your editor and run the cloned repository and install the modules below to 
 ## Setup
 To run this project, use the live link in the GitHub repo:
 The live link to the project is provided below.
-[https://nyururu-pitches-hub.herokuapp.com/]
+[https://pitches-hub.herokuapp.com/]
 
 
-https://nyururu-pitches-hub.herokuapp.com/
+https://pitches-hub.herokuapp.com/
 
 
 ## Contributing
