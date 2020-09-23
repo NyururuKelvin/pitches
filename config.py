@@ -3,7 +3,6 @@ from flask_mail import Mail
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    # SQLALCHEMY_DATABASE_URI ='postgresql+psycopg2://moringa:nyururu@localhost/pitches'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 587
