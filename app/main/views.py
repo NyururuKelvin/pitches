@@ -50,7 +50,6 @@ def profile(uname):
 @login_required
 def update_profile(uname):
     user = User.query.filter_by(username = uname).first()
-    pitch=Pitch.query.filter_by(user_id=current_user.id).all()
     
     if user is None:
         abort(404)
